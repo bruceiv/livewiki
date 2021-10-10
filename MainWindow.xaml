@@ -1,0 +1,64 @@
+﻿<!-- Copyright (c) 2011 Aaron Moss
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE. -->
+<Window x:Class="LiveWiki.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:lw="clr-namespace:LiveWiki"
+        Height="350" Width="525" Closing="Window_Closing">
+    <ScrollViewer>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="20" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+        <DockPanel LastChildFill="True" Grid.Column="1" Grid.Row="1">
+            <ToolBar DockPanel.Dock="Top">
+                <!--<Button ToolTip="Heading" Command="{x:Static lw:WikiCommands.WikiHeading}">Heading</Button>-->
+                <Button ToolTip="Bold" Command="{x:Static lw:WikiCommands.WikiBold}">
+                    <TextBlock FontWeight="ExtraBold" FontSize="16" FontFamily="Times New Roman">B</TextBlock>
+                </Button>
+                <Button ToolTip="Italic" Command="{x:Static lw:WikiCommands.WikiItalic}">
+                    <TextBlock FontWeight="Bold" FontStyle="Italic" FontSize="16" FontFamily="Times New Roman">I</TextBlock>
+                </Button>
+                </ToolBar>
+            <RichTextBox Name="editField" AcceptsTab="False" AcceptsReturn="True" DockPanel.Dock="Top"
+                HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Visible"
+                Height="200"
+                SelectionChanged="selectChanged"
+                PreviewTextInput="LogTextInput" PreviewKeyDown="LogKeyDown" MouseLeftButtonUp="LogMouseLeftButtonUp" 
+                >
+            </RichTextBox>
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Name="previewButton" Click="RefreshPreview">Show Preview</Button>
+            </StackPanel>
+                <RichTextBox Name="previewField" IsReadOnly="True"
+                    HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"
+                    BorderBrush="Transparent" Height="Auto" Margin="0,0,0,20"
+                    >
+                </RichTextBox>
+            </DockPanel>
+        </Grid>
+    </ScrollViewer>
+</Window>
